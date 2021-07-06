@@ -6,7 +6,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <link href="assets/img/icons/icon-48x48.png" rel="stylesheet">
-
+        
         <title>Corona Live For Education</title>
 
         <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" type="text/css">

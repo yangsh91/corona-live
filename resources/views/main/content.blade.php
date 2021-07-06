@@ -331,26 +331,39 @@
                 </div>
                 <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
                     <div class="card flex-fill w-100">
-                        <div class="card-header">
-
-                            <h5 class="card-title mb-0">지역별 누적 확진자수</h5>
+                        <div class="card-header">                            
+                            <h5 class="card-title mb-0">지역별 누적 확진자수</h5>                            
                         </div>
                         <div class="card-body px-4">
                             <div id="region_map" style="height:350px;"></div>
                         </div>
                     </div>
                 </div>
+                <!--
                 <div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
                     <div class="card flex-fill">
                         <div class="card-header">
-
                             <h5 class="card-title mb-0">Calendar</h5>
                         </div>
                         <div class="card-body d-flex">
                             <div class="align-self-center w-100">
                                 <div class="chart">
-                                    <div id="datetimepicker-dashboard"></div>
+                                    <div id="datetime_calendar"></div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                -->
+                <div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
+                    <div class="card flex-fill w-100">
+                        <div class="card-header">
+
+                            <h5 class="card-title mb-0">Monthly Sales</h5>
+                        </div>
+                        <div class="card-body d-flex w-100">
+                            <div class="align-self-center chart chart-lg">
+                                <canvas id="chartjs-dashboard-bar"></canvas>
                             </div>
                         </div>
                     </div>
@@ -436,20 +449,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="col-12 col-lg-4 col-xxl-3 d-flex">
-                    <div class="card flex-fill w-100">
-                        <div class="card-header">
-
-                            <h5 class="card-title mb-0">Monthly Sales</h5>
-                        </div>
-                        <div class="card-body d-flex w-100">
-                            <div class="align-self-center chart chart-lg">
-                                <canvas id="chartjs-dashboard-bar"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div>                
             </div>
 
         </div>
@@ -529,10 +529,10 @@
             
             $('#tbl_age_static').html(
                 '<table><tbody>' +
-                '<tr><td>0-19세</td><td class="text-end">' + age.ageChildren+ '</td></tr>' +
-                '<tr><td>20-39세</td><td class="text-end">' + age.ageGolden + '</td></tr>' +
-                '<tr><td>40-59세</td><td class="text-end">' + age.ageAdult + '</td></tr>' +
-                '<tr><td>60세 이상</td><td class="text-end">' + age.ageSilver + '</td></tr>' +
+                '<tr><td>0-19세</td><td class="text-end">' + numberWithCommas(age.ageChildren) + '</td></tr>' +
+                '<tr><td>20-39세</td><td class="text-end">' + numberWithCommas(age.ageGolden) + '</td></tr>' +
+                '<tr><td>40-59세</td><td class="text-end">' + numberWithCommas(age.ageAdult) + '</td></tr>' +
+                '<tr><td>60세 이상</td><td class="text-end">' + numberWithCommas(age.ageSilver) + '</td></tr>' +
                 '</table></tbody>'
             );
             
@@ -553,15 +553,15 @@
 					datasets: [{
 						data: ageGrp,
 						backgroundColor: [
-                            window.theme.primary,
-                            window.theme.primary,
-                            window.theme.primary,
-                            window.theme.primary,
-                            window.theme.primary,
-                            window.theme.primary,
-							window.theme.primary,
-							window.theme.warning,
-							window.theme.danger
+                            'yellow',
+                            'yellow',
+                            'blue',
+                            'blue',
+                            'black',
+                            'black',
+                            'silver',
+                            'silver',
+                            'silver'
 						],
 						borderWidth: 5
 					}]
@@ -743,10 +743,10 @@
             for(var i=0;i<19;i++){
                 html += "<tr>";
                 html += "<td>" + region.item[i].gubun + "</td>";
-                html += "<td>" + region.item[i].defCnt + "</td>";
-                html += "<td>" + region.item[i].deathCnt + "</td>";
-                html += "<td><span class=\"badge badge-success\"> +" + region.item[i].isolClearCnt + "</span></td>";
-                html += "<td><span class=\"badge badge-danger\"> +" + region.item[i].incDec + "</span></td>";
+                html += "<td>" + numberWithCommas(region.item[i].defCnt) + "</td>";
+                html += "<td>" + numberWithCommas(region.item[i].deathCnt) + "</td>";
+                html += "<td><span class=\"badge badge-success\"> +" + numberWithCommas(region.item[i].isolClearCnt) + "</span></td>";
+                html += "<td><span class=\"badge badge-danger\"> +" + numberWithCommas(region.item[i].incDec) + "</span></td>";
                 html += "</tr>";
             }            
             $("#tbl_region_cnt tbody").html(html);
@@ -757,24 +757,35 @@
 		});
 	</script>
 	<script>        
-
-		$(function() {
-			$('#datetimepicker-dashboard').datetimepicker({
-				inline: true,
+        $(function() {
+            $('#datetime_calendar').datetimepicker({
+                inline: true,
 				sideBySide: false,
-                days: ['일', '월','화','수','목','금','토'],
-                daysShort: ['일', '월','화','수','목','금','토'],
-                daysMin: ['일', '월','화','수','목','금','토'],
-                months: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-                monthsShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],                
+                format: 'L',
+                maxDate: new Date(),
+                onSelect: function(dateText, inst) {
+                    console.log(dateText);
+                }
+            });
+        /*
+		$(function() {
+			$('#datetime_calendar').datetimepicker({
+				inline: true,
+				sideBySide: false,                
 				format: 'L',
-                maxDate: new Date()
+                maxDate: new Date(),                
 			});
-
-            //console.log("==== " + $("#datetimepicker-dashboard").data("datetimepicker").getDate() + " ====");
-            //console.log(":::: " + $("#datetimepicker-dashboard").find("input").val() + " ::::");
+        */
+            //console.log("==== " + $("#datetime_calendar").data("datetimepicker").getDate() + " ====");
+            //console.log("==== " + $("#datetime_calendar").datetimepicker("getDate") + " ====");
+            //console.log(":::: " + $("#datetime_calendar").find("input").val() + " ::::");
             
 		});
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
         
 	</script>
 
