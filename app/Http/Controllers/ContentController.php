@@ -104,7 +104,7 @@ class ContentController extends Controller
         $ageParam = '?' . urlencode('ServiceKey') . '=' . $key; /*Service Key*/
         $ageParam .= '&' . urlencode('pageNo') . '=' . urlencode('1'); /**/
         $ageParam .= '&' . urlencode('numOfRows') . '=' . urlencode('10'); /**/
-        $ageParam .= '&' . urlencode('startCreateDt') . '=' . urlencode($date); /**/
+        $ageParam .= '&' . urlencode('startCreateDt') . '=' . urlencode($yesterday); /**/
         $ageParam .= '&' . urlencode('endCreateDt') . '=' . urlencode($date); /**/
 
 
