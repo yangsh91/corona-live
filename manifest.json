@@ -1,0 +1,22 @@
+{
+"name" : "Corona Live For Edu",
+"short_name" : "CLFE",
+"description": "This Web Application is Learning PHP Framework Laravel For Education.",
+"icons" : [
+    {
+        "src" : "https://image.flaticon.com/icons/png/512/900/900782.png",
+        "sizes" : "192x192",
+        "type" : "image/png"
+    },
+    {
+        "src" : "https://image.flaticon.com/icons/png/512/900/900782.png",
+        "sizes" : "512x512",
+        "type" : "image/png"
+    }
+],
+"display" : "standalone",
+"orientation" : "landscape",
+"background_color" : "#fff",
+"theme_color" : "#fff",
+"start_url" : "/"
+}

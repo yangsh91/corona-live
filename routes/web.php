@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContentController;
+use App\Http\Controllers\RegionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,7 @@ use App\Http\Controllers\ContentController;
 // });
 
 
-Route::get('/', [ContentController::class, 'index']);
+Route::get('/', [ContentController::class, 'main']);
+Route::get('/world', [ContentController::class, 'worldLive']);
+
+Route::get('/region', [ContentController::class, 'regionApi']);

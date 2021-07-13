@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\CurlController as curl;
+use Illuminate\Support\Facades\DB;
 
 class ContentController extends Controller
 {
-    public function index()
+
+    public function __construct()
+    {
+        
+    }
+
+    public function main()
     {
 
         $key = urlencode(iconv('euc-kr','utf-8','Wq24xQBvYdlZ5SkdIEs9vysJpMQ09E7dLw3oLtQWkbIYp+l2tph1UjJ9n+19lwst+NngPiF9AxA7aPCEBWI1kw=='));        
@@ -24,8 +31,8 @@ class ContentController extends Controller
         $queryParams .= '&' . urlencode('startCreateDt') . '=' . urlencode($yesterday); /**/
         $queryParams .= '&' . urlencode('endCreateDt') . '=' . urlencode($date); /**/
 
-
-        $result = curl::getCurl($url, $queryParams);
+ 
+        $result = curl::getXml($url, $queryParams);
         $result = json_decode($result);        
 
         // 확진자 증가수
@@ -44,7 +51,7 @@ class ContentController extends Controller
         $daysParam .= '&' . urlencode('endCreateDt') . '=' . urlencode($date); /**/
 
 
-        $weekResult = curl::getCurl($url, $daysParam);
+        $weekResult = curl::getXml($url, $daysParam);
         $weekResult = json_decode($weekResult);
 
         for($i=0;$i<sizeof($weekResult->body->items->item);$i++){           
@@ -63,7 +70,7 @@ class ContentController extends Controller
 
         $url = 'http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson'; /*URL*/
         
-        $korResult = curl::getCurl($url, $queryParams);
+        $korResult = curl::getXml($url, $queryParams);
         $korResult = json_decode($korResult);
                 
 
@@ -108,7 +115,7 @@ class ContentController extends Controller
         $ageParam .= '&' . urlencode('endCreateDt') . '=' . urlencode($date); /**/
 
 
-        $ageResult = curl::getCurl($ageUrl, $ageParam);
+        $ageResult = curl::getXml($ageUrl, $ageParam);
         $ageResult = json_decode($ageResult);
 
         $ageResult->body->items->ageChildren = $ageResult->body->items->item[0]->confCase + $ageResult->body->items->item[1]->confCase;
@@ -117,15 +124,132 @@ class ContentController extends Controller
         $ageResult->body->items->ageSilver = $ageResult->body->items->item[6]->confCase + $ageResult->body->items->item[7]->confCase + $ageResult->body->items->item[8]->confCase;
         
 
+        //curl::scrapper();
+
+        $mon_cnt = DB::table('tbl_corona_region')
+                     ->select(DB::raw(
+                         'concat(date_format(create_dt, "%m"), "월") as dt
+                          , sum(incDec) as cnt'))
+                     //->select(DB::raw('count(*) as cnt '))                     
+                     ->groupBy('dt')
+                     ->get();
+              
         
         return view('main.content',[
                                     'data' => $result->body->items,
                                     'weekData' => $weekResult->body->items, 
                                     'region' => $korResult->body->items,
-                                    'age'    => $ageResult->body->items
+                                    'age'    => $ageResult->body->items,
+                                    'monArr' => $mon_cnt,
+                                    'mode' => 'home'
                                     ]
                     );
             //->with('posts', Post::orderBy('updated_at', 'DESC')->get());
+    }
+
+
+    public function worldLive()
+    {
+
+        $key = urlencode(iconv('euc-kr','utf-8','Wq24xQBvYdlZ5SkdIEs9vysJpMQ09E7dLw3oLtQWkbIYp+l2tph1UjJ9n+19lwst+NngPiF9AxA7aPCEBWI1kw=='));        
+
+        $date = date_create();
+        $date = date_format($date, 'Ymd');
+        $yesterday = date('Ymd', strtotime('-3 day', strtotime($date)));
+        $weekDay = date('Ymd', strtotime('-1 day', strtotime($date)));
+
+        $url = 'http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson'; /*URL*/
+        $queryParams = '?' . urlencode('ServiceKey') . '=' . $key; /*Service Key*/
+        $queryParams .= '&' . urlencode('pageNo') . '=' . urlencode('1'); /**/
+        $queryParams .= '&' . urlencode('numOfRows') . '=' . urlencode('20'); /**/
+        $queryParams .= '&' . urlencode('startCreateDt') . '=' . urlencode($yesterday); /**/
+        $queryParams .= '&' . urlencode('endCreateDt') . '=' . urlencode($date); /**/
+
+ 
+        $result = curl::getXml($url, $queryParams);
+        $result = json_decode($result);
+
+        $jsonNa = $result->body->items->item;
+        //print_r($result);
+
+        foreach($jsonNa as $key => $val):            
+            $sort[$key] = $jsonNa[$key]->natDefCnt;            
+        endforeach;
+
+        array_multisort($sort, SORT_DESC, $jsonNa);
+        //print_r($jsonNa);
+        
+
+        return view('main.world',[
+                'jsonNa' => $jsonNa,
+                'mode' => 'world'
+                ]);
+
+
+    }
+
+
+    public function regionApi()
+    {
+
+        $url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson";
+        $key = urlencode(iconv('euc-kr','utf-8','Wq24xQBvYdlZ5SkdIEs9vysJpMQ09E7dLw3oLtQWkbIYp+l2tph1UjJ9n+19lwst+NngPiF9AxA7aPCEBWI1kw=='));
+
+        $params = '?' . urlencode('ServiceKey') . '=' . $key; /*Service Key*/
+        $params .= '&' . urlencode('pageNo') . '=' . urlencode('1'); /**/
+        $params .= '&' . urlencode('numOfRows') . '=' . urlencode('10'); /**/
+        $params .= '&' . urlencode('startCreateDt') . '=' . urlencode('20210702'); /**/
+        $params .= '&' . urlencode('endCreateDt') . '=' . urlencode('20210710'); /**/
+
+        $result = curl::getXml($url, $params);
+        $result = json_decode($result);
+
+        $data = $result->body->items;      
+                
+        for($i=0;$i<sizeof($data->item);$i++){
+
+            $date = date_create($data->item[$i]->createDt);
+            $createDt = date_format($date, "Y-m-d h:i:s");            
+
+            $results = DB::table('tbl_corona_region')->insert(
+                [
+                 'seq' => $data->item[$i]->seq,
+                 'create_dt' => $createDt,
+                 'region_nm' => $data->item[$i]->gubun,
+                 'region_cn' => $data->item[$i]->gubunCn,
+                 'region_en' => $data->item[$i]->gubunEn,
+                 'defCnt' => $data->item[$i]->defCnt,
+                 'incDec' => $data->item[$i]->incDec,
+                 'deathCnt' => $data->item[$i]->deathCnt,
+                 'isolIngCnt' => $data->item[$i]->isolIngCnt,
+                 'isolClearCnt' => $data->item[$i]->isolClearCnt,
+                 'localOccCnt' => $data->item[$i]->localOccCnt,
+                 'overFlowCnt' => $data->item[$i]->overFlowCnt,
+                 'qurRate' => $data->item[$i]->qurRate 
+                ]                              
+            );
+            
+            if(! $result){
+                echo "sql error!";
+                break;
+            }
+
+        }
+        
+
+        echo "SUCCESS!!!";
+
+        /*
+        foreach($result as $key => $rows){
+
+            echo "<br/>";
+            echo $key. " +++ ";
+            print_r($rows);
+            echo "<br/>";
+
+        }*/
+
+
     }
     
 }

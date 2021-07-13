@@ -2,7 +2,7 @@
     <div class="row text-muted">
         <div class="col-6 text-left">
             <p class="mb-0">
-                <a href="index.html" class="text-muted"><strong>AdminKit Demo</strong></a> &copy;
+                <a href="/" class="text-muted"><strong>Corona Live For Edu</strong></a> &copy;
             </p>
         </div>
         <div class="col-6 text-right">

@@ -4,46 +4,11 @@
 
 <nav id="sidebar" class="sidebar">
     <div class="sidebar-content js-simplebar">
-        <a class="sidebar-brand" href="index.html">
-  <span class="align-middle">CLFE</span>
-</a>
+        <a class="sidebar-brand" href="/">
+            <span class="align-middle">CLFE</span>
+        </a>
 
-        <ul class="sidebar-nav">
-            <li class="sidebar-header">
-                Pages
-            </li>
-
-            <li class="sidebar-item active">
-                <a class="sidebar-link" href="index.html">
-                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">국내</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-profile.html">
-                <i class="align-middle" data-feather="user"></i> <span class="align-middle">해외</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-settings.html">
-                <i class="align-middle" data-feather="settings"></i> <span class="align-middle">Settings</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-invoice.html">
-                <i class="align-middle" data-feather="credit-card"></i> <span class="align-middle">Invoice</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="pages-blank.html">
-                <i class="align-middle" data-feather="book"></i> <span class="align-middle">Blank</span>
-                </a>
-            </li>
-            
-        </ul>
+        @include('layouts.left')
     </div>
 </nav>
 
@@ -228,7 +193,7 @@
 
             <div class="row mb-2 mb-xl-3">
                 <div class="col-auto d-none d-sm-block">
-                    <h3><strong>Analytics</strong> Dashboard</h3>
+                    <h3>코로나 <strong>확진자수</strong></h3>
                 </div>
 
                 <div class="col-auto ml-auto text-right mt-n1">
@@ -359,7 +324,7 @@
                     <div class="card flex-fill w-100">
                         <div class="card-header">
 
-                            <h5 class="card-title mb-0">Monthly Sales</h5>
+                            <h5 class="card-title mb-0">월별 확진자수</h5>
                         </div>
                         <div class="card-body d-flex w-100">
                             <div class="align-self-center chart chart-lg">
@@ -387,66 +352,7 @@
                                     <th class="d-none d-md-table-cell">전일대비</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <!--
-                                <tr>
-                                    <td>Project Apollo</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2020</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2020</td>
-                                    <td><span class="badge badge-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Fireball</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2020</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2020</td>
-                                    <td><span class="badge badge-danger">Cancelled</span></td>
-                                    <td class="d-none d-md-table-cell">William Harris</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Hades</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2020</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2020</td>
-                                    <td><span class="badge badge-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Nitro</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2020</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2020</td>
-                                    <td><span class="badge badge-warning">In progress</span></td>
-                                    <td class="d-none d-md-table-cell">Vanessa Tucker</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Phoenix</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2020</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2020</td>
-                                    <td><span class="badge badge-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">William Harris</td>
-                                </tr>
-                                <tr>
-                                    <td>Project X</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2020</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2020</td>
-                                    <td><span class="badge badge-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">Sharon Lessman</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Romeo</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2020</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2020</td>
-                                    <td><span class="badge badge-success">Done</span></td>
-                                    <td class="d-none d-md-table-cell">Christina Mason</td>
-                                </tr>
-                                <tr>
-                                    <td>Project Wombat</td>
-                                    <td class="d-none d-xl-table-cell">01/01/2020</td>
-                                    <td class="d-none d-xl-table-cell">31/06/2020</td>
-                                    <td><span class="badge badge-warning">In progress</span></td>
-                                    <td class="d-none d-md-table-cell">William Harris</td>
-                                </tr>
-                            -->
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>                
@@ -468,6 +374,7 @@
         var grp = @json($weekData);        
         var labels = new Array();
         var days = new Array();             
+        
 
         for(var i=7;i>=1;i--){            
             labels.push(grp.item[i].stateDt);
@@ -502,11 +409,11 @@
 					scales: {
 						yAxes: [{
 							gridLines: {
-								display: false
+								display: true
 							},
-							stacked: false,
+							stacked: true,
 							ticks: {
-								stepSize: 20
+								stepSize: 0
 							}
 						}],
 						xAxes: [{
@@ -514,7 +421,7 @@
 							gridLines: {
 								color: "transparent"
 							}
-						}]
+						}],
 					}
 				}
 			});
@@ -528,12 +435,12 @@
 
             
             $('#tbl_age_static').html(
-                '<table><tbody>' +
-                '<tr><td>0-19세</td><td class="text-end">' + numberWithCommas(age.ageChildren) + '</td></tr>' +
-                '<tr><td>20-39세</td><td class="text-end">' + numberWithCommas(age.ageGolden) + '</td></tr>' +
-                '<tr><td>40-59세</td><td class="text-end">' + numberWithCommas(age.ageAdult) + '</td></tr>' +
-                '<tr><td>60세 이상</td><td class="text-end">' + numberWithCommas(age.ageSilver) + '</td></tr>' +
-                '</table></tbody>'
+                '<tbody>' +
+                '<tr><td>0-19세</td><td class="text-end">' + numberWithCommas(age.ageChildren) + '명</td></tr>' +
+                '<tr><td>20-39세</td><td class="text-end">' + numberWithCommas(age.ageGolden) + '명</td></tr>' +
+                '<tr><td>40-59세</td><td class="text-end">' + numberWithCommas(age.ageAdult) + '명</td></tr>' +
+                '<tr><td>60세 이상</td><td class="text-end">' + numberWithCommas(age.ageSilver) + '명</td></tr>' +
+                '</tbody>'
             );
             
 
@@ -579,18 +486,28 @@
 	</script>
 	<script>
 		$(function() {
+
+            var monArr = @json($monArr);
+            var monLabel = new Array();
+            var monData = new Array();
+
+            for(var i=0;i<monArr.length;i++){   
+                monLabel.push(monArr[i].dt);
+                monData.push(monArr[i].cnt);
+            }
+
 			// Bar chart
 			new Chart(document.getElementById("chartjs-dashboard-bar"), {
 				type: 'bar',
 				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+					labels: monLabel,
 					datasets: [{
-						label: "This year",
+						label: "확진자수 : ",
 						backgroundColor: window.theme.primary,
 						borderColor: window.theme.primary,
 						hoverBackgroundColor: window.theme.primary,
 						hoverBorderColor: window.theme.primary,
-						data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
+						data: monData,
 						barPercentage: .75,
 						categoryPercentage: .5
 					}]
@@ -603,11 +520,12 @@
 					scales: {
 						yAxes: [{
 							gridLines: {
-								display: false
+								display: true
 							},
+                            stacked: true,
 							stacked: false,
 							ticks: {
-								stepSize: 20
+								stepSize: 0
 							}
 						}],
 						xAxes: [{
@@ -623,7 +541,6 @@
 	</script>
 	<script>
         var region = @json($region);
-        console.log(region);
 
 		$(function() {
 			$("#region_map").vectorMap({
@@ -656,71 +573,71 @@
                 markers: [
                     {
                     latLng: [37.53104313019439, 126.9937543561867],
-                    name: "서울 (" + region.item[17].defCnt + ")" 
+                    name: "서울 (" + numberWithCommas(region.item[17].defCnt) + ")" 
                     }
                     ,{
                     latLng: [37.448570, 126.705526],
-                    name: "인천 (" + region.item[14].defCnt + ")" 
+                    name: "인천 (" + numberWithCommas(region.item[14].defCnt) + ")" 
                     }
                     ,{
                     latLng: [37.329276, 127.383905],
-                    name: "경기 (" + region.item[9].defCnt + ")" 
+                    name: "경기 (" + numberWithCommas(region.item[9].defCnt) + ")" 
                     }
                     ,{
                     latLng: [36.336884, 127.387824],
-                    name: "대전 (" + region.item[12].defCnt + ")" 
+                    name: "대전 (" + numberWithCommas(region.item[12].defCnt) + ")" 
                     }
                     ,{
                     latLng: [35.820656906917186, 128.58178659163752],
-                    name: "대구 (" + region.item[15].defCnt + ")" 
+                    name: "대구 (" + numberWithCommas(region.item[15].defCnt) + ")" 
                     }
                     ,{
                     latLng: [35.142493511440335, 126.83434103761101],
-                    name: "광주 (" + region.item[13].defCnt + ")" 
+                    name: "광주 (" + numberWithCommas(region.item[13].defCnt) + ")" 
                     }
                     ,{
                     latLng: [35.530716207011956, 129.27332887472036],
-                    name: "울산 (" + region.item[11].defCnt + ")" 
+                    name: "울산 (" + numberWithCommas(region.item[11].defCnt) + ")" 
                     }
                     ,{
                     latLng: [35.14857382293423, 129.07999447299827],
-                    name: "부산 (" + region.item[16].defCnt + ")" 
+                    name: "부산 (" + numberWithCommas(region.item[16].defCnt) + ")" 
                     }                    
                     ,{
                     latLng: [36.519099870678744, 127.2691745879341],
-                    name: "세종 (" + region.item[10].defCnt + ")" 
+                    name: "세종 (" + numberWithCommas(region.item[10].defCnt) + ")" 
                     }
                     ,{
                     latLng: [35.814752337155156, 127.12515640069495],
-                    name: "전북 (" + region.item[5].defCnt + ")" 
+                    name: "전북 (" + numberWithCommas(region.item[5].defCnt) + ")" 
                     }
                     ,{
                     latLng: [34.740666956058874, 126.9423513051883],
-                    name: "전남 (" + region.item[4].defCnt + ")" 
+                    name: "전남 (" + numberWithCommas(region.item[4].defCnt) + ")" 
                     }
                     ,{
                     latLng: [36.43925740840318, 128.64485292232828],
-                    name: "경북 (" + region.item[3].defCnt + ")" 
+                    name: "경북 (" + numberWithCommas(region.item[3].defCnt) + ")" 
                     }
                     ,{
                     latLng: [35.403923741437396, 128.6698237897298],
-                    name: "경남 (" + region.item[2].defCnt + ")" 
+                    name: "경남 (" + numberWithCommas(region.item[2].defCnt) + ")" 
                     }
                     ,{
                     latLng: [36.875949551495616, 127.86238911046159],
-                    name: "충북 (" + region.item[7].defCnt + ")" 
+                    name: "충북 (" + numberWithCommas(region.item[7].defCnt) + ")" 
                     }
                     ,{
                     latLng: [36.47443553397595, 126.80845426001015],
-                    name: "충남 (" + region.item[6].defCnt + ")" 
+                    name: "충남 (" + numberWithCommas(region.item[6].defCnt) + ")" 
                     }
                     ,{
                     latLng: [37.78137174624893, 128.4001384530638],
-                    name: "강원 (" + region.item[16].defCnt + ")" 
+                    name: "강원 (" + numberWithCommas(region.item[16].defCnt) + ")" 
                     }
                     ,{
                     latLng: [33.33356461970605, 126.54899111552427],
-                    name: "제주 (" + region.item[16].defCnt + ")" 
+                    name: "제주 (" + numberWithCommas(region.item[16].defCnt) + ")" 
                     }
 
                 ],
@@ -764,7 +681,7 @@
                 format: 'L',
                 maxDate: new Date(),
                 onSelect: function(dateText, inst) {
-                    console.log(dateText);
+                    //console.log(dateText);
                 }
             });
         /*
