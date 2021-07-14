@@ -155,7 +155,7 @@ class ContentController extends Controller
 
         $date = date_create();
         $date = date_format($date, 'Ymd');
-        $yesterday = date('Ymd', strtotime('-3 day', strtotime($date)));
+        $yesterday = date('Ymd', strtotime('-1 day', strtotime($date)));
         $weekDay = date('Ymd', strtotime('-1 day', strtotime($date)));
 
         $url = 'http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson'; /*URL*/

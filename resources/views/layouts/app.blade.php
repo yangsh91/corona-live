@@ -10,7 +10,7 @@
         <title>Corona Live For Education</title>
 
         <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" type="text/css">
-        <script src="{{ asset('assets/js/app.js') }}"></script>
+        
         <link rel="manifest" href="{{ asset('assets/js/manifest.json') }}">
     </head>
     <body>

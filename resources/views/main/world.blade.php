@@ -17,8 +17,8 @@
 <div class="main">
     <nav class="navbar navbar-expand navbar-light navbar-bg">
         <a class="sidebar-toggle d-flex">
-  <i class="hamburger align-self-center"></i>
-</a>
+           <i class="hamburger align-self-center"></i>
+        </a>
         <!--
         <form class="form-inline d-none d-sm-inline-block">
             <div class="input-group input-group-navbar">
@@ -197,7 +197,7 @@
                 <div class="col-auto d-none d-sm-block">
                     <h3>세계 코로나 <strong>확진자수</strong></h3>
                 </div>
-
+                <!--
                 <div class="col-auto ml-auto text-right mt-n1">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
@@ -207,6 +207,7 @@
                         </ol>
                     </nav>
                 </div>
+            -->
             </div>
 
             <div class="row">
@@ -231,7 +232,7 @@
                 <div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
                     <div class="card flex-fill w-100">
                         <div class="card-header">                            
-                            <h5 class="card-title mb-0">-</h5>                            
+                            <h5 class="card-title mb-0">글로벌맵</h5>                            
                         </div>
                         <div class="card-body px-4">
                             <div id="region_map" style="height:350px;"></div>
@@ -282,6 +283,8 @@
 <script>
 
     $(function(){
+
+        $("#{{ $mode }}").addClass("active");
 
         var jsonNa = @json($jsonNa);
         var wLabel = new Array();

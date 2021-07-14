@@ -13,9 +13,3 @@
         </a>
     </li>
 </ul>
-
-<script>
-    $(function(){        
-        $("#{{ $mode }}").addClass("active");        
-    });    
-</script>

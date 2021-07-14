@@ -8,16 +8,16 @@
         <div class="col-6 text-right">
             <ul class="list-inline">
                 <li class="list-inline-item">
-                    <a class="text-muted" href="#">Support</a>
+                    <a class="text-muted" href="#">Developer</a>
                 </li>
                 <li class="list-inline-item">
-                    <a class="text-muted" href="#">Help Center</a>
+                    <a class="text-muted" href="#">Contact</a>
                 </li>
                 <li class="list-inline-item">
-                    <a class="text-muted" href="#">Privacy</a>
+                    <a class="text-muted" href="https://github.com/yangsh91/corona-live" target="_blank">Github</a>
                 </li>
                 <li class="list-inline-item">
-                    <a class="text-muted" href="#">Terms</a>
+                    <a class="text-muted" href="#">Provide</a>
                 </li>
             </ul>
         </div>

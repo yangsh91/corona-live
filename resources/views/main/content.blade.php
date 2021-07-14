@@ -15,8 +15,8 @@
 <div class="main">
     <nav class="navbar navbar-expand navbar-light navbar-bg">
         <a class="sidebar-toggle d-flex">
-  <i class="hamburger align-self-center"></i>
-</a>
+        <i class="hamburger align-self-center"></i>
+        </a>
         <!--
         <form class="form-inline d-none d-sm-inline-block">
             <div class="input-group input-group-navbar">
@@ -195,7 +195,7 @@
                 <div class="col-auto d-none d-sm-block">
                     <h3>코로나 <strong>확진자수</strong></h3>
                 </div>
-
+                <!--
                 <div class="col-auto ml-auto text-right mt-n1">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
@@ -205,6 +205,7 @@
                         </ol>
                     </nav>
                 </div>
+            -->
             </div>
             <div class="row">
                 <div class="col-xl-6 col-xxl-5 d-flex">
@@ -382,6 +383,9 @@
         }
 
 		$(function() {
+
+            $("#{{ $mode }}").addClass("active");
+
 			var ctx = document.getElementById('chartjs-dashboard-line').getContext("2d");
 			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
 			gradient.addColorStop(0, 'rgba(215, 227, 244, 1)');
