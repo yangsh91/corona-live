@@ -13,7 +13,7 @@
 </nav>
 
 <div class="main">
-    <nav class="navbar navbar-expand navbar-light navbar-bg">
+    <nav class="navbar navbar-expand fixed-top navbar-light navbar-bg">
         <a class="sidebar-toggle d-flex">
         <i class="hamburger align-self-center"></i>
         </a>

@@ -1,11 +1,11 @@
 <div class="container-fluid">
     <div class="row text-muted">
-        <div class="col-6 text-left">
+        <div class="col-3 text-left">
             <p class="mb-0">
-                <a href="/" class="text-muted"><strong>Corona Live For Edu</strong></a> &copy;
+                <a href="/" class="text-muted"><strong>CLFE</strong></a>
             </p>
         </div>
-        <div class="col-6 text-right">
+        <div class="col-9 text-right">
             <ul class="list-inline">
                 <li class="list-inline-item">
                     <a class="text-muted" href="#">Developer</a>
