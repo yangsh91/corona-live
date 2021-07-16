@@ -15,10 +15,7 @@
                 </li>
                 <li class="list-inline-item">
                     <a class="text-muted" href="https://github.com/yangsh91/corona-live" target="_blank">Github</a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="text-muted" href="#">Provide</a>
-                </li>
+                </li>                
             </ul>
         </div>
     </div>

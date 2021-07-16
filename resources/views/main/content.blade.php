@@ -217,8 +217,9 @@
                                         <h5 class="card-title mb-4">총확진자수</h5>
                                         <h1 class="display-5 mt-1 mb-3">{{ number_format($data->item[0]->decideCnt) }}</h1>
                                         <div class="mb-1">
-                                            <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> {{ $data->incrCnt }} </span>
-                                            <span class="text-muted">Since last week</span>
+                                            <span class="text-muted">전일대비 </span>
+                                            <span class="text-danger"> {{ number_format($data->incrCnt) }}</span>
+                                            <span class="text-muted">명 증가</span>
                                         </div>
                                     </div>
                                 </div>
@@ -227,8 +228,9 @@
                                         <h5 class="card-title mb-4">총완치자</h5>
                                         <h1 class="display-5 mt-1 mb-3">{{ number_format($data->item[0]->clearCnt) }}</h1>
                                         <div class="mb-1">
-                                            <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> {{ $data->incrClearCnt }} </span>
-                                            <span class="text-muted">Since last week</span>
+                                            <span class="text-muted">전일대비 </span>
+                                            <span class="text-success">{{ number_format($data->incrClearCnt) }}</span>
+                                            <span class="text-muted">명 증가</span>
                                         </div>
                                     </div>
                                 </div>
@@ -239,8 +241,9 @@
                                         <h5 class="card-title mb-4">총사망자</h5>
                                         <h1 class="display-5 mt-1 mb-3">{{ number_format($data->item[0]->deathCnt) }}</h1>
                                         <div class="mb-1">
-                                            <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> {{ $data->incrDeathCnt }} </span>
-                                            <span class="text-muted">Since last week</span>
+                                            <span class="text-muted">전일대비 </span>
+                                            <span class="text-danger">{{ number_format($data->incrDeathCnt) }}</span>
+                                            <span class="text-muted">명 증가</span>
                                         </div>
                                     </div>
                                 </div>
@@ -249,8 +252,9 @@
                                         <h5 class="card-title mb-4">총검사자</h5>
                                         <h1 class="display-5 mt-1 mb-3">{{ number_format($data->item[0]->accExamCnt) }}</h1>
                                         <div class="mb-1">
-                                            <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> {{ $data->incrExamCnt }} </span>
-                                            <span class="text-muted">Since last week</span>
+                                            <span class="text-muted">전일대비 </span>
+                                            <span class="text-warning">{{ number_format($data->incrExamCnt) }}</span>
+                                            <span class="text-muted">명 증가</span>
                                         </div>
                                     </div>
                                 </div>
@@ -347,10 +351,10 @@
                             <thead>
                                 <tr>
                                     <th>지역</th>
-                                    <th class="d-none d-xl-table-cell">확진자</th>
-                                    <th class="d-none d-xl-table-cell">사망자</th>
+                                    <th>확진자</th>
+                                    <th>사망자</th>
                                     <th>완치자</th>
-                                    <th class="d-none d-md-table-cell">전일대비</th>
+                                    <th>전일대비</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
@@ -526,8 +530,7 @@
 							gridLines: {
 								display: true
 							},
-                            stacked: true,
-							stacked: false,
+							stacked: true,
 							ticks: {
 								stepSize: 0
 							}
@@ -537,7 +540,7 @@
 							gridLines: {
 								color: "transparent"
 							}
-						}]
+						}],
 					}
 				}
 			});
