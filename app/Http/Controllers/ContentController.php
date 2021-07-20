@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\CurlController as curl;
+use App\Models\ContentModel;
 use Illuminate\Support\Facades\DB;
 
 class ContentController extends Controller
@@ -11,7 +12,7 @@ class ContentController extends Controller
 
     public function __construct()
     {
-        
+        $this->test = new ContentModel();    
     }
 
     public function main()
@@ -150,7 +151,7 @@ class ContentController extends Controller
 
     public function worldLive()
     {
-
+        /*
         $key = urlencode(iconv('euc-kr','utf-8','Wq24xQBvYdlZ5SkdIEs9vysJpMQ09E7dLw3oLtQWkbIYp+l2tph1UjJ9n+19lwst+NngPiF9AxA7aPCEBWI1kw=='));        
 
         $date = date_create();
@@ -158,12 +159,12 @@ class ContentController extends Controller
         $yesterday = date('Ymd', strtotime('-1 day', strtotime($date)));
         $weekDay = date('Ymd', strtotime('-1 day', strtotime($date)));
 
-        $url = 'http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson'; /*URL*/
-        $queryParams = '?' . urlencode('ServiceKey') . '=' . $key; /*Service Key*/
-        $queryParams .= '&' . urlencode('pageNo') . '=' . urlencode('1'); /**/
-        $queryParams .= '&' . urlencode('numOfRows') . '=' . urlencode('20'); /**/
-        $queryParams .= '&' . urlencode('startCreateDt') . '=' . urlencode($yesterday); /**/
-        $queryParams .= '&' . urlencode('endCreateDt') . '=' . urlencode($date); /**/
+        $url = 'http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson'; 
+        $queryParams = '?' . urlencode('ServiceKey') . '=' . $key; 
+        $queryParams .= '&' . urlencode('pageNo') . '=' . urlencode('1'); 
+        $queryParams .= '&' . urlencode('numOfRows') . '=' . urlencode('20'); 
+        $queryParams .= '&' . urlencode('startCreateDt') . '=' . urlencode($yesterday); 
+        $queryParams .= '&' . urlencode('endCreateDt') . '=' . urlencode($date); 
 
  
         $result = curl::getXml($url, $queryParams);
@@ -184,7 +185,21 @@ class ContentController extends Controller
                 'jsonNa' => $jsonNa,
                 'mode' => 'world'
                 ]);
+        */        
 
+        //echo $this->test->worldList();
+        $dataRow = DB::table('tbl_corona_world')     
+                    ->whereRaw('create_dt = date_format((select create_dt from tbl_corona_world order by create_dt desc limit 1), "%Y-%m-%d")')                
+                    ->orderByDesc('natDefCnt')
+                    ->get();
+
+        
+                    
+            
+        return view('main.world',[
+                'jsonNa' => $dataRow,
+                'mode' => 'world'
+                ]);            
 
     }
 
@@ -198,8 +213,8 @@ class ContentController extends Controller
         $params = '?' . urlencode('ServiceKey') . '=' . $key; /*Service Key*/
         $params .= '&' . urlencode('pageNo') . '=' . urlencode('1'); /**/
         $params .= '&' . urlencode('numOfRows') . '=' . urlencode('10'); /**/
-        $params .= '&' . urlencode('startCreateDt') . '=' . urlencode('20210702'); /**/
-        $params .= '&' . urlencode('endCreateDt') . '=' . urlencode('20210710'); /**/
+        $params .= '&' . urlencode('startCreateDt') . '=' . urlencode('20210711'); /**/
+        $params .= '&' . urlencode('endCreateDt') . '=' . urlencode('20210719'); /**/
 
         $result = curl::getXml($url, $params);
         $result = json_decode($result);
@@ -236,19 +251,55 @@ class ContentController extends Controller
 
         }
         
-
         echo "SUCCESS!!!";
 
-        /*
-        foreach($result as $key => $rows){
+    }
 
-            echo "<br/>";
-            echo $key. " +++ ";
-            print_r($rows);
-            echo "<br/>";
+    public function worldApi()
+    {
 
-        }*/
+        $url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson";
+        $key = urlencode(iconv('euc-kr','utf-8','Wq24xQBvYdlZ5SkdIEs9vysJpMQ09E7dLw3oLtQWkbIYp+l2tph1UjJ9n+19lwst+NngPiF9AxA7aPCEBWI1kw=='));
 
+        $params = '?' . urlencode('ServiceKey') . '=' . $key; /*Service Key*/
+        $params .= '&' . urlencode('pageNo') . '=' . urlencode('1'); /**/
+        $params .= '&' . urlencode('numOfRows') . '=' . urlencode('10'); /**/
+        $params .= '&' . urlencode('startCreateDt') . '=' . urlencode('20210718'); /**/
+        $params .= '&' . urlencode('endCreateDt') . '=' . urlencode('20210720'); /**/
+
+        $result = curl::getXml($url, $params);
+        $result = json_decode($result);
+
+        $data = $result->body->items;      
+                
+        for($i=0;$i<sizeof($data->item);$i++){
+
+            $date = date_create($data->item[$i]->createDt);
+            $createDt = date_format($date, "Y-m-d h:i:s");
+
+            $results = DB::table('tbl_corona_world')->insert(
+                [
+                 'seq' => $data->item[$i]->seq,
+                 'create_dt' => $createDt,
+                 'areaNm' => $data->item[$i]->areaNm,
+                 'areaNm_cn' => $data->item[$i]->areaNmCn,
+                 'areaNm_en' => $data->item[$i]->areaNmEn,
+                 'nationNm' => $data->item[$i]->nationNm,
+                 'nationNm_cn' => $data->item[$i]->nationNmCn,
+                 'nationNm_en' => $data->item[$i]->nationNmEn,
+                 'natDefCnt' => $data->item[$i]->natDefCnt,
+                 'natDeathCnt' => $data->item[$i]->natDeathCnt,
+                 'natDeathRate' => $data->item[$i]->natDeathRate,
+                ]                          
+                
+            );
+            
+            if(! $result){
+                echo "sql error!";
+                break;
+            }
+
+        }
 
     }
     

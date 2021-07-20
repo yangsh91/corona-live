@@ -24,3 +24,4 @@ Route::get('/', [ContentController::class, 'main']);
 Route::get('/world', [ContentController::class, 'worldLive']);
 
 Route::get('/region', [ContentController::class, 'regionApi']);
+Route::get('/worldApi', [ContentController::class, 'worldApi']);

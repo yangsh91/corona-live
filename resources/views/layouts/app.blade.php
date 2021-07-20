@@ -5,12 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link href="assets/img/icons/icon-48x48.png" rel="stylesheet">
+        <link rel="shortcut icon" href="/assets/img/icon/coronavirus.png">
+        <link rel="apple-touch-icon" href="/assets/img/icon/coronavirus.png">
         
         <title>Corona Live For Education</title>
 
-        <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" type="text/css">
-        
+        <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet" type="text/css">        
         <link rel="manifest" href="{{ asset('assets/js/manifest.json') }}">
     </head>
     <body>
