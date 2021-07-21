@@ -80,3 +80,19 @@ self.addEventListener('pushsubscriptionchange', function(event) {
     })
   );
 });
+
+
+function showNotification(){
+    Notification.requestPermission(function(result) {
+        if(result === 'granted') {
+            navigator.serviceWorker.ready.then(function(registration) {
+                registration.showNotification('Vibration Sample', {
+                    body : 'Buzz Test',
+                    icon : '/assets/img/icon/coronavirus.png',
+                    vibrate : [200, 100, 200, 100, 200, 100, 200],
+                    tag : 'vibration-sample'
+                });
+            });
+        }
+    });
+}
