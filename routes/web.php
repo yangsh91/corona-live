@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\RegionController;
+use App\Http\Controllers\FcmController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,5 @@ Route::get('/world', [ContentController::class, 'worldLive']);
 
 Route::get('/region', [ContentController::class, 'regionApi']);
 Route::get('/worldApi', [ContentController::class, 'worldApi']);
+
+Route::get('/fcm', [FcmController::class, 'index']);
