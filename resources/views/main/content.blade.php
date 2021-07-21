@@ -10,7 +10,6 @@
 
         @include('layouts.left')
     </div>
-    
 </nav>
 
 <div class="main">

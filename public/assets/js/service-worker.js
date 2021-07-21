@@ -6,7 +6,7 @@
  const cacheName = 'v3';
  const cacheList = [
    '/',
-   '/manifest.json',
+   '/assets/js/manifest.json',
    '/scripts/app.js',
    '/styles/index.css',
    '/images/1.jpg',
