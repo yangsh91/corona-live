@@ -35,13 +35,13 @@
 
     // Your web app's Firebase configuration
     var firebaseConfig = {
-        apiKey: "AIzaSyCTugUWys8dpxLcnbh3kxr_2pnLfeHXgis",
-        authDomain: "corona-live-fe.firebaseapp.com",
-        projectId: "corona-live-fe",
-        storageBucket: "corona-live-fe.appspot.com",
-        messagingSenderId: "348888085242",
-        appId: "1:348888085242:web:0548a4bdfc1de1bcb24f43",
-        measurementId: "G-LB6MRH3TEB"
+        apiKey: "AIzaSyCSRMGDX6yNJ4aJchj5IkKzdMrFwu7J_QM",
+        authDomain: "laravel-1d4c5.firebaseapp.com",
+        projectId: "laravel-1d4c5",
+        storageBucket: "laravel-1d4c5.appspot.com",
+        messagingSenderId: "377639846073",
+        appId: "1:377639846073:web:dc40616709d2ce833e5b68",
+        measurementId: "G-EKF098E6M8"
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
