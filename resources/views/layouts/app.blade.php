@@ -18,6 +18,6 @@
             @yield('content')
         </div>        
 
-        <script src="{{ asset('assets/js/service-worker.js') }}" async></script>
+        <script src="{{ asset('assets/js/main.js') }}" async></script>
     </body>
 </html>
