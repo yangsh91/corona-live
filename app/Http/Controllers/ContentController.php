@@ -150,7 +150,7 @@ class ContentController extends Controller
 
 
     public function worldLive()
-    {
+    { 
         /*
         $key = urlencode(iconv('euc-kr','utf-8','Wq24xQBvYdlZ5SkdIEs9vysJpMQ09E7dLw3oLtQWkbIYp+l2tph1UjJ9n+19lwst+NngPiF9AxA7aPCEBWI1kw=='));        
 
@@ -264,8 +264,8 @@ class ContentController extends Controller
         $params = '?' . urlencode('ServiceKey') . '=' . $key; /*Service Key*/
         $params .= '&' . urlencode('pageNo') . '=' . urlencode('1'); /**/
         $params .= '&' . urlencode('numOfRows') . '=' . urlencode('10'); /**/
-        $params .= '&' . urlencode('startCreateDt') . '=' . urlencode('20210718'); /**/
-        $params .= '&' . urlencode('endCreateDt') . '=' . urlencode('20210720'); /**/
+        $params .= '&' . urlencode('startCreateDt') . '=' . urlencode('20210601'); /**/
+        $params .= '&' . urlencode('endCreateDt') . '=' . urlencode('20210630'); /**/
 
         $result = curl::getXml($url, $params);
         $result = json_decode($result);
