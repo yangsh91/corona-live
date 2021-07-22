@@ -13,7 +13,7 @@ class FcmController extends Controller
 
     public function sendNoti()
     {
-        $token = "e1IeuxQgwUo:APA91bFMhUglmW2MNU1Ui5DK5m4cWkDPzb1igfmZEncJH1UL3uae2UGd5wJ8BPTgOrcKvS7ftKF1O_JWHn4BvsH_cfKb0uDKUJoKRpt8LDIjFRBg5l0gjLbx-h3Cw30PShaA36XM4vXx";  
+        $token = "d4zhzdTil9c:APA91bEfERj4oOwtSV4_9YKz4QIYVwty8jvUuPAODjv1sEkZ1DW7un_kZbA-Kb03giQYa0ZeEwXKbNDkdNAkoy5m8wSFez5t29zzxwad08MVHDkwiq4tI-gk8SHH4hPre-v3A7Lp8jkG";  
         $from = "AAAAV-0WwLk:APA91bF_luycW3zLbnAHNi5QESV6YPqRn9FhjNFuHE3O3RSC0jb20_1ddfEHKgCGOCeCNXST8xAcfDSJE7pnZuKpPcK-B9KcVKOdR9t4-G4R_MoUp_Cphgfq2gRKuglnbujgYsdY5L76";
         $msg = array
               (

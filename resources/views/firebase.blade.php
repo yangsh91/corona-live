@@ -53,6 +53,7 @@
     //MsgElem.innerHTML = "Notification permission granted." 
         console.log("Notification permission granted.");
 
+        console.log("token ajax ??");
         // get the token in the form of promise
         return messaging.getToken()
     })
