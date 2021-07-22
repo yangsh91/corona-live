@@ -12,7 +12,4 @@
         <i class="align-middle" data-feather="grid"></i> <span class="align-middle">세계</span>
         </a>
     </li>
-    <li class="siderbar-item">
-        <a class="sidebar-link" id="subscribe">subscribe!</a>
-    </li>
 </ul>

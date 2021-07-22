@@ -192,12 +192,11 @@
 
     <main class="content">
         <div class="container-fluid p-0">
-
+            <!--
             <div class="row mb-2 mb-xl-3">
                 <div class="col-auto d-none d-sm-block">
                     <h3>세계 코로나 <strong>확진자수</strong></h3>
                 </div>
-                <!--
                 <div class="col-auto ml-auto text-right mt-n1">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
@@ -207,9 +206,8 @@
                         </ol>
                     </nav>
                 </div>
-            -->
             </div>
-
+            -->
             <div class="row">
                 <div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
                     <div class="card flex-fill w-100">

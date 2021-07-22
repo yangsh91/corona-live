@@ -7,7 +7,6 @@
     <title>FCM</title>
 
     <!-- firebase integration started -->
-
     <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
     <!-- Firebase App is always required and must be first -->
     <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-app.js"></script>

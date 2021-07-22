@@ -1,22 +1,86 @@
-import '@firebase/messaging';
+ // Life cycle: INSTALL
+ self.addEventListener('install', event => {
+    self.skipWaiting();
+    log('INSTALL');
+    caches.open(cacheName).then(cache => {
+      log('Caching app shell');
+      return cache.addAll(cacheList);
+    })
+  });
 
-const config = {
-    apiKey: "AIzaSyCTugUWys8dpxLcnbh3kxr_2pnLfeHXgis",
-    authDomain: "corona-live-fe.firebaseapp.com",
-    projectId: "corona-live-fe",
-    storageBucket: "corona-live-fe.appspot.com",
-    messagingSenderId: "348888085242",
-    appId: "1:348888085242:web:0548a4bdfc1de1bcb24f43",
-    measurementId: "G-LB6MRH3TEB"
+
+ // Your web app's Firebase configuration
+ var firebaseConfig = {
+    apiKey: "AIzaSyCSRMGDX6yNJ4aJchj5IkKzdMrFwu7J_QM",
+    authDomain: "laravel-1d4c5.firebaseapp.com",
+    projectId: "laravel-1d4c5",
+    storageBucket: "laravel-1d4c5.appspot.com",
+    messagingSenderId: "377639846073",
+    appId: "1:377639846073:web:dc40616709d2ce833e5b68",
+    measurementId: "G-EKF098E6M8"
 };
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+//firebase.analytics();
+const messaging = firebase.messaging();
+    messaging
+.requestPermission()
+.then(function () {
+//MsgElem.innerHTML = "Notification permission granted." 
+    console.log("Notification permission granted.");
 
-firebase.initializeApp(config);
-const messaging = firebase.messaging()
-messaging.usePublicVapidKey("Your Web push key");
-Notification.requestPermission().then(function(permission) {
-  if (permission === 'granted') {
-    console.log('Notification permission granted.');
-  } else {
-    console.log('Unable to get permission to notify.');
-  }
+    console.log("token ajax ??");
+    // get the token in the form of promise
+    return messaging.getToken()
+})
+.then(function(token) {
+// print the token on the HTML page     
+console.log(token);
+
+
+
+})
+.catch(function (err) {
+    console.log("Unable to get permission to notify.", err);
 });
+
+messaging.onMessage(function(payload) {
+    console.log(payload);
+    var notify;
+    notify = new Notification(payload.notification.title,{
+        body: payload.notification.body,
+        icon: payload.notification.icon,
+        tag: "Dummy"
+    });
+    console.log(payload.notification);
+});
+
+    //firebase.initializeApp(config);
+var database = firebase.database().ref().child("/users/");
+
+database.on('value', function(snapshot) {
+    renderUI(snapshot.val());
+});
+
+// On child added to db
+database.on('child_added', function(data) {
+    console.log("Comming");
+    if(Notification.permission!=='default'){
+        var notify;
+        
+        notify= new Notification('CodeWife - '+data.val().username,{
+            'body': data.val().message,
+            'icon': 'bell.png',
+            'tag': data.getKey()
+        });
+        notify.onclick = function(){
+            alert(this.tag);
+        }
+    }else{
+        alert('Please allow the notification first');
+    }
+});
+
+self.addEventListener('notificationclick', function(event) {       
+    event.notification.close();
+}); 
