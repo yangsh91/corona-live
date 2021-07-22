@@ -28,3 +28,4 @@ Route::get('/region', [ContentController::class, 'regionApi']);
 Route::get('/worldApi', [ContentController::class, 'worldApi']);
 
 Route::get('/fcm', [FcmController::class, 'index']);
+Route::get('/sendNoti', [FcmController::class, 'sendNoti']);
