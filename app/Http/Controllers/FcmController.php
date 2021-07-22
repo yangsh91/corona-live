@@ -3,12 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FcmController extends Controller
 {
     public function index()
     {
         return view('firebase');
+    }
+
+    public function saveToken(Request $request)
+    {
+        echo "<pre>";
+        print_r($request);
+        echo "</pre>";
+
+        $result = DB::table('tbl_user_token')->insert(
+            [
+             'token' => $request->input('token')
+            ]                                      
+        );
+
+        return $result;
+
     }
 
     public function sendNoti()

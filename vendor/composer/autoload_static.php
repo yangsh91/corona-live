@@ -555,6 +555,7 @@ class ComposerStaticInitaff3666087fb92e96624cf011ea83276
         'App\\Http\\Controllers\\ContentController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContentController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\CurlController' => __DIR__ . '/../..' . '/app/Http/Controllers/CurlController.php',
+        'App\\Http\\Controllers\\FcmController' => __DIR__ . '/../..' . '/app/Http/Controllers/FcmController.php',
         'App\\Http\\Controllers\\RegionController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegionController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',

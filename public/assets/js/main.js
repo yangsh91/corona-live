@@ -27,15 +27,24 @@ const messaging = firebase.messaging();
 .requestPermission()
 .then(function () {
 //MsgElem.innerHTML = "Notification permission granted." 
-    console.log("Notification permission granted.");
-
-    console.log("token ajax ??");
+    // console.log("Notification permission granted.");
     // get the token in the form of promise
     return messaging.getToken()
 })
 .then(function(token) {
-// print the token on the HTML page     
-console.log(token);
+    // print the token on the HTML page     
+    //console.log(token);
+    $.ajax({
+        url : '/saveToken',
+        data : {'token' : token},
+        type : 'POST',
+        dataType : 'json',
+        success : function(result){
+
+            console.log("===== " + result + " =====");
+
+        }
+    });
 
 
 

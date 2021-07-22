@@ -11,6 +11,7 @@ return array(
     'App\\Http\\Controllers\\ContentController' => $baseDir . '/app/Http/Controllers/ContentController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\CurlController' => $baseDir . '/app/Http/Controllers/CurlController.php',
+    'App\\Http\\Controllers\\FcmController' => $baseDir . '/app/Http/Controllers/FcmController.php',
     'App\\Http\\Controllers\\RegionController' => $baseDir . '/app/Http/Controllers/RegionController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
