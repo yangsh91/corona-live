@@ -1,14 +1,6 @@
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+import '@firebase/messaging';
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
-
-<script>
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  var firebaseConfig = {
+const config = {
     apiKey: "AIzaSyCTugUWys8dpxLcnbh3kxr_2pnLfeHXgis",
     authDomain: "corona-live-fe.firebaseapp.com",
     projectId: "corona-live-fe",
@@ -16,8 +8,15 @@
     messagingSenderId: "348888085242",
     appId: "1:348888085242:web:0548a4bdfc1de1bcb24f43",
     measurementId: "G-LB6MRH3TEB"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
-</script>
+};
+
+firebase.initializeApp(config);
+const messaging = firebase.messaging()
+messaging.usePublicVapidKey("Your Web push key");
+Notification.requestPermission().then(function(permission) {
+  if (permission === 'granted') {
+    console.log('Notification permission granted.');
+  } else {
+    console.log('Unable to get permission to notify.');
+  }
+});
