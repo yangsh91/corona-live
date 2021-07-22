@@ -35,7 +35,7 @@ class FcmController extends Controller
                     'Authorization: key=' . $from,
                     'Content-Type: application/json'
                 );
-        //#Send Reponse To FireBase Server 
+        //#Send Reponse To FireBase Server         
         $ch = curl_init();
 
         curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
