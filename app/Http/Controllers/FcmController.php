@@ -18,7 +18,7 @@ class FcmController extends Controller
         $msg = array
               (
                 'body'  => "Testing Testing",
-                'title' => "Hi, From Raj",
+                'title' => "Hi, From Rahel",
                 'receiver' => 'erw',
                 'icon'  => "https://image.flaticon.com/icons/png/512/270/270014.png",/*Default Icon*/
                 'sound' => 'mySound'/*Default sound*/
@@ -37,6 +37,7 @@ class FcmController extends Controller
                 );
         //#Send Reponse To FireBase Server 
         $ch = curl_init();
+
         curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
         curl_setopt( $ch,CURLOPT_POST, true );
         curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
