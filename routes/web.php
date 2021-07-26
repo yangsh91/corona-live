@@ -28,5 +28,5 @@ Route::get('/region', [ContentController::class, 'regionApi']);
 Route::get('/worldApi', [ContentController::class, 'worldApi']);
 
 Route::get('/fcm', [FcmController::class, 'index']);
-Route::get('/saveToken', [FcmController::class, 'saveToken']);
+Route::post('/saveToken', [FcmController::class, 'saveToken']);
 Route::get('/sendNoti', [FcmController::class, 'sendNoti']);
