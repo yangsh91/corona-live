@@ -32,6 +32,7 @@
 
         <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-analytics.js"></script>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>
         <div class="wrapper">

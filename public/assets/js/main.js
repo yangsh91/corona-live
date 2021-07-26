@@ -35,6 +35,9 @@ const messaging = firebase.messaging();
     // print the token on the HTML page     
     //console.log(token);
     $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         url : '/saveToken',
         data : {'token' : token},
         type : 'POST',

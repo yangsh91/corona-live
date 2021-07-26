@@ -15,7 +15,7 @@
 </nav>
 
 <div class="main">
-    <nav class="navbar navbar-expand fixed-top navbar-light navbar-bg">
+    <nav class="navbar navbar-expand navbar-light navbar-bg">
         <a class="sidebar-toggle d-flex">
            <i class="hamburger align-self-center"></i>
         </a>
@@ -192,22 +192,12 @@
 
     <main class="content">
         <div class="container-fluid p-0">
-            <!--
-            <div class="row mb-2 mb-xl-3">
+            <div class="row mb-2 mb-xl-3">                
                 <div class="col-auto d-none d-sm-block">
                     <h3>세계 코로나 <strong>확진자수</strong></h3>
-                </div>
-                <div class="col-auto ml-auto text-right mt-n1">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb bg-transparent p-0 mt-1 mb-0">
-                            <li class="breadcrumb-item"><a href="#">AdminKit</a></li>
-                            <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Analytics</li>
-                        </ol>
-                    </nav>
-                </div>
+                </div>                
             </div>
-            -->
+
             <div class="row">
                 <div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
                     <div class="card flex-fill w-100">
@@ -253,6 +243,28 @@
             </div>
 
             <div class="row">
+                <div class="col-12 col-lg-8 col-xxl-9 d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">국가별 감염자 통계</h5>
+                        </div>
+                        <table class="table table-hover my-0" id="tbl_region_cnt" style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th>지역</th>
+                                    <th>확진자</th>
+                                    <th>사망자</th>
+                                    <th>완치자</th>
+                                    <th>전일대비</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>                
+            </div>
+
+            <div class="row">
                 <div class="col-md-12 d-flex">
                     <div class="w-100">
                         <div class="row" id="tbl_world_stat"></div>
@@ -267,7 +279,7 @@
                         </div>                                             
                     </div>
                 </div>                              
-            </div>            
+            </div>                         
         </div>
     </main>
 
