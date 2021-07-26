@@ -38,7 +38,7 @@ const messaging = firebase.messaging();
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        url : '/saveToken',
+        url : '{{ route('saveToken') }}',
         data : {'token' : token},
         type : 'POST',
         dataType : 'json',
