@@ -31,13 +31,12 @@
         <!-- <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase-storage.js"></script> -->
 
         <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-analytics.js"></script>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-analytics.js"></script>        
     </head>
     <body>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <div class="wrapper">
             @yield('content')
-
             <script src="{{ asset('assets/js/main.js') }}"></script>
         </div>                
     </body>
