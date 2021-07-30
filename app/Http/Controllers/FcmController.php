@@ -14,10 +14,6 @@ class FcmController extends Controller
 
     public function saveToken(Request $request)
     {
-        echo "<pre>";
-        print_r($request);
-        echo "</pre>";
-
         $result = DB::table('tbl_user_token')->insert(
             [
              'token' => $request->input('token')
@@ -30,6 +26,12 @@ class FcmController extends Controller
 
     public function sendNoti()
     {
+
+        $tokens = DB::table('tbl_user_token')->select('token');
+
+        print_r($tokens);
+
+        /*
         $token = "d4zhzdTil9c:APA91bEfERj4oOwtSV4_9YKz4QIYVwty8jvUuPAODjv1sEkZ1DW7un_kZbA-Kb03giQYa0ZeEwXKbNDkdNAkoy5m8wSFez5t29zzxwad08MVHDkwiq4tI-gk8SHH4hPre-v3A7Lp8jkG";  
         $from = "AAAAV-0WwLk:APA91bF_luycW3zLbnAHNi5QESV6YPqRn9FhjNFuHE3O3RSC0jb20_1ddfEHKgCGOCeCNXST8xAcfDSJE7pnZuKpPcK-B9KcVKOdR9t4-G4R_MoUp_Cphgfq2gRKuglnbujgYsdY5L76";
         $msg = array
@@ -37,8 +39,8 @@ class FcmController extends Controller
                 'body'  => "Testing Testing",
                 'title' => "Hi, From Rahel",
                 'receiver' => 'erw',
-                'icon'  => "https://image.flaticon.com/icons/png/512/270/270014.png",/*Default Icon*/
-                'sound' => 'mySound'/*Default sound*/
+                'icon'  => "/assets/img/icon/coronavirus.png",
+                'sound' => 'mySound'
               );
 
         $fields = array
@@ -52,7 +54,8 @@ class FcmController extends Controller
                     'Authorization: key=' . $from,
                     'Content-Type: application/json'
                 );
-        //#Send Reponse To FireBase Server         
+        
+                //#Send Reponse To FireBase Server         
         $ch = curl_init();
 
         curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
@@ -64,5 +67,7 @@ class FcmController extends Controller
         $result = curl_exec($ch );
         dd($result);
         curl_close( $ch );
+
+        */
     }
 }
