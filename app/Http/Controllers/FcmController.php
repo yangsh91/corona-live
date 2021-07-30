@@ -14,12 +14,23 @@ class FcmController extends Controller
 
     public function saveToken(Request $request)
     {
+
+        $token_chk = DB::table('tbl_user_token')
+            ->select(DB::raw('count(1)'))
+            ->where('token', '=', $request->input('token'))
+            ->get();
+
+        $result = $token_chk;   
+
+        /*   
         $result = DB::table('tbl_user_token')->insert(
             [
              'token' => $request->input('token')
             ]                                      
         );
 
+        return $result;
+        */
         return $result;
 
     }
