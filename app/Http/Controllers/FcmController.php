@@ -33,7 +33,7 @@ class FcmController extends Controller
     public function sendNoti()
     {
 
-        $tokens = DB::table('tbl_user_token')->select('token')->get();
+        $tokens = DB::table('tbl_user_token')->select(DB::raw('token'))->get();
 
         
         $from = "AAAAV-0WwLk:APA91bF_luycW3zLbnAHNi5QESV6YPqRn9FhjNFuHE3O3RSC0jb20_1ddfEHKgCGOCeCNXST8xAcfDSJE7pnZuKpPcK-B9KcVKOdR9t4-G4R_MoUp_Cphgfq2gRKuglnbujgYsdY5L76";
