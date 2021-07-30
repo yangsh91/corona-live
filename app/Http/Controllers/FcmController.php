@@ -15,12 +15,11 @@ class FcmController extends Controller
     public function saveToken(Request $request)
     {
 
-        $token_chk = DB::table('tbl_user_token')
-            ->select(DB::raw('count(1)'))
+        $query = DB::table('tbl_user_token')            
             ->where('token', '=', $request->input('token'))
             ->get();
-
-        $result = $token_chk;   
+        $cnt = $query->count();
+        $result = $cnt;   
 
         /*   
         $result = DB::table('tbl_user_token')->insert(
