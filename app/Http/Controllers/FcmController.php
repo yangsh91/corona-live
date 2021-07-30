@@ -19,19 +19,15 @@ class FcmController extends Controller
             ->where('token', '=', $request->input('token'))
             ->get();
         $cnt = $query->count();
-        $result = $cnt;   
+        
 
-        /*   
-        $result = DB::table('tbl_user_token')->insert(
-            [
-             'token' => $request->input('token')
-            ]                                      
-        );
-
-        return $result;
-        */
-        return $result;
-
+        if($cnt == 0){   
+            $result = DB::table('tbl_user_token')->insert(
+                [
+                'token' => $request->input('token')
+                ]                                      
+            );
+        }  
     }
 
     public function sendNoti()
@@ -39,15 +35,15 @@ class FcmController extends Controller
 
         $tokens = DB::table('tbl_user_token')->select('token')->get();
 
-        print_r($tokens);
-
-        /*
-        $token = "d4zhzdTil9c:APA91bEfERj4oOwtSV4_9YKz4QIYVwty8jvUuPAODjv1sEkZ1DW7un_kZbA-Kb03giQYa0ZeEwXKbNDkdNAkoy5m8wSFez5t29zzxwad08MVHDkwiq4tI-gk8SHH4hPre-v3A7Lp8jkG";  
+        
         $from = "AAAAV-0WwLk:APA91bF_luycW3zLbnAHNi5QESV6YPqRn9FhjNFuHE3O3RSC0jb20_1ddfEHKgCGOCeCNXST8xAcfDSJE7pnZuKpPcK-B9KcVKOdR9t4-G4R_MoUp_Cphgfq2gRKuglnbujgYsdY5L76";
-        $msg = array
+        foreach($tokens as $key => $val):
+            $token = $val['token'];
+
+            $msg = array
               (
-                'body'  => "Testing Testing",
-                'title' => "Hi, From Rahel",
+                'body'  => "역천괴역천괴역천괴역천괴역천괴역천괴",
+                'title' => "알림테스트 해보는즁",
                 'receiver' => 'erw',
                 'icon'  => "/assets/img/icon/coronavirus.png",
                 'sound' => 'mySound'
@@ -65,7 +61,7 @@ class FcmController extends Controller
                     'Content-Type: application/json'
                 );
         
-                //#Send Reponse To FireBase Server         
+        //#Send Reponse To FireBase Server         
         $ch = curl_init();
 
         curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
@@ -78,6 +74,7 @@ class FcmController extends Controller
         dd($result);
         curl_close( $ch );
 
-        */
+        endforeach;
+
     }
 }
