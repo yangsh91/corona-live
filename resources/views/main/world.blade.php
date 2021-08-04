@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <nav id="sidebar" class="sidebar">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="/">
@@ -242,45 +241,53 @@
                 </div>
             </div>
 
+            <div class="row mb-2 mb-xl-3">                
+                <div class="col-auto d-none d-sm-block">
+                    <h3>국가별 감염자 통계</h3>
+                </div>                
+            </div>
+
             <div class="row">
-                <div class="col-12 col-lg-8 col-xxl-9 d-flex">
+                <div class="col-6 col-lg-6 col-xxl-6 d-flex">
                     <div class="card flex-fill">
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">국가별 감염자 통계</h5>
-                        </div>
-                        <table class="table table-hover my-0" id="tbl_region_cnt" style="text-align: center;">
+                        <table class="table table-hover my-0" id="tbl_world_cnt_1" style="text-align: center;">
                             <thead>
                                 <tr>
                                     <th>지역</th>
                                     <th>확진자</th>
-                                    <th>사망자</th>
-                                    <th>완치자</th>
+                                    <th>사망자</th>                                    
                                     <th>전일대비</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
                     </div>
-                </div>                
-            </div>
+                </div>    
+                            
+                <div class="col-6 col-lg-6 col-xxl-6 d-flex">
+                    <div class="card flex-fill">
+                        <table class="table table-hover my-0" id="tbl_world_cnt_2" style="text-align: center;">
+                            <thead>
+                                <tr>
+                                    <th>지역</th>
+                                    <th>확진자</th>
+                                    <th>사망자</th>                                    
+                                    <th>전일대비</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
 
-            <div class="row">
-                <div class="col-md-12 d-flex">
-                    <div class="w-100">
-                        <div class="row" id="tbl_world_stat"></div>
-                    </div>
-                </div>  
-                <div class="col-md-12 d-flex">
-                    <div class="w-100">       
-                        <div class="col-sm-12">
-                            <div class="card">                            
-                                <button type="button" class="btn btn-primary" id="btn_more_world">더보기</button>
-                            </div>                                
-                        </div>                                             
-                    </div>
-                </div>                              
-            </div>                         
-        </div>
+                <div class="w-100">       
+                    <div class="col-sm-12">
+                        <div class="card">                            
+                            <button type="button" class="btn btn-primary" id="btn_more_world">더보기</button>
+                        </div>                                
+                    </div>                                             
+                </div>
+            </div>
     </main>
 
     <footer class="footer">
@@ -330,23 +337,23 @@
                 markers: [
                     {
                         latLng: [39.81208805209909, -101.14322760207529],
-                        name: "미국 (" + numberWithCommas(jsonNa[0].natDefCnt) + ")" 
+                        name: "미국 (" + numberWithCommas(jsonNa[0].nationDefCnt) + ")" 
                     },
                     {
                         latLng: [23.52794008190942, 79.47201030764019],
-                        name: "인도 (" + numberWithCommas(jsonNa[1].natDefCnt) + ")" 
+                        name: "인도 (" + numberWithCommas(jsonNa[1].nationDefCnt) + ")" 
                     },
                     {
                         latLng: [-8.54358700909542, -53.97329128438263],
-                        name: "브라질 (" + numberWithCommas(jsonNa[2].natDefCnt) + ")" 
+                        name: "브라질 (" + numberWithCommas(jsonNa[2].nationDefCnt) + ")" 
                     },
                     {
                         latLng: [62.79521536150938, 92.28085411315915],
-                        name: "러시아 (" + numberWithCommas(jsonNa[3].natDefCnt) + ")" 
+                        name: "러시아 (" + numberWithCommas(jsonNa[3].nationDefCnt) + ")" 
                     },
                     {
                         latLng: [46.74028142081584, 2.6324183628787026],
-                        name: "프랑스 (" + numberWithCommas(jsonNa[4].natDefCnt) + ")" 
+                        name: "프랑스 (" + numberWithCommas(jsonNa[4].nationDefCnt) + ")" 
                     },                    
                 ],
                 onRegionTipShow: function(event, tip, code){                                  
@@ -363,32 +370,49 @@
                     //console.log('region over', tip, code);                                       
                 }				
 			});
-        
-        html = "";
-        for(var i=0;i<jsonNa.length;i++){            
-            if(i < 32){
-                html += "<div class=\"col-sm-3\" id=naBlock_" + i + "><div class=\"card\">";
+
+        wHtml_1 = "";
+        wHtml_2 = "";
+        for(var i=0;i<jsonNa.length;i++){    
+
+            if(i < 95){
+                if(i > 45){
+                    wHtml_1 += "<tr class='naBlock' style='display: none;'>";
+                }else{
+                    wHtml_1 += "<tr>";
+                }                
+                
+                wHtml_1 += "<td>" +  jsonNa[i].na_nm + "</td>";
+                wHtml_1 += "<td>" +  numberWithCommas(jsonNa[i].nationDefCnt) + "</td>";
+                wHtml_1 += "<td>" +  numberWithCommas(jsonNa[i].natDeathCnt) + "</td>";            
+                wHtml_1 += "<td> <i class=\"fa fa-plus\" style=\"color: red;\"></i> " +  numberWithCommas(jsonNa[i].defCnt) + "</td>";
+                wHtml_1 += "</tr>";
             }else{
-                html += "<div class=\"col-sm-3 naBlock\" style=\"display: none;\" id=naBlock_" + i + "><div class=\"card\">";
+                if(i > 140){
+                    wHtml_2 += "<tr class='naBlock' style='display: none;'>";
+                }else{
+                    wHtml_2 += "<tr>";
+                }
+                wHtml_2 += "<td>" +  jsonNa[i].na_nm + "</td>";
+                wHtml_2 += "<td>" +  numberWithCommas(jsonNa[i].nationDefCnt) + "</td>";
+                wHtml_2 += "<td>" +  numberWithCommas(jsonNa[i].natDeathCnt) + "</td>";            
+                wHtml_2 += "<td> <i class=\"fa fa-plus\" style=\"color: red;\"></i> " +  numberWithCommas(jsonNa[i].defCnt) + "</td>";
+                wHtml_2 += "</tr>";
             }
-                html += "<div class=\"card-body\">";
-                html += "<div class=\"mb-1\">";
-                html += "<span class=\"text-secondary\">" + jsonNa[i].nationNm + "</span>";
-                html += "<div style=\"display: inline-block;width: 45%;text-align: right;\"><span class=\"badge badge-danger\">" + numberWithCommas(jsonNa[i].natDefCnt) + "</span></div>";
-                html += "</div>";                
-                html += "</div>";
-                html += "</div></div>";
         }
+
+        //wHtml += "</tbody>";
 
         //console.log(html);
 
         //if(!html){
-        $("#tbl_world_stat").html(html);
+        $("#tbl_world_cnt_1 tbody").html(wHtml_1);
+        $("#tbl_world_cnt_2 tbody").html(wHtml_2);
         //}
 
         for(var i=0;i<5;i++){
-            wLabel.push(jsonNa[i].nationNm);
-            wCnt.push(jsonNa[i].natDefCnt);            
+            wLabel.push(jsonNa[i].na_nm);
+            wCnt.push(jsonNa[i].nationDefCnt);            
         }
 			
 		new Chart(document.getElementById("chartjs-dashboard-pie"), {

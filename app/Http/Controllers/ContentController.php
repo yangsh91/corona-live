@@ -150,52 +150,20 @@ class ContentController extends Controller
 
 
     public function worldLive()
-    { 
-        /*
-        $key = urlencode(iconv('euc-kr','utf-8','Wq24xQBvYdlZ5SkdIEs9vysJpMQ09E7dLw3oLtQWkbIYp+l2tph1UjJ9n+19lwst+NngPiF9AxA7aPCEBWI1kw=='));        
-
-        $date = date_create();
-        $date = date_format($date, 'Ymd');
-        $yesterday = date('Ymd', strtotime('-1 day', strtotime($date)));
-        $weekDay = date('Ymd', strtotime('-1 day', strtotime($date)));
-
-        $url = 'http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson'; 
-        $queryParams = '?' . urlencode('ServiceKey') . '=' . $key; 
-        $queryParams .= '&' . urlencode('pageNo') . '=' . urlencode('1'); 
-        $queryParams .= '&' . urlencode('numOfRows') . '=' . urlencode('20'); 
-        $queryParams .= '&' . urlencode('startCreateDt') . '=' . urlencode($yesterday); 
-        $queryParams .= '&' . urlencode('endCreateDt') . '=' . urlencode($date); 
-
- 
-        $result = curl::getXml($url, $queryParams);
-        $result = json_decode($result);
-
-        $jsonNa = $result->body->items->item;
-        //print_r($result);
-
-        foreach($jsonNa as $key => $val):            
-            $sort[$key] = $jsonNa[$key]->natDefCnt;            
-        endforeach;
-
-        array_multisort($sort, SORT_DESC, $jsonNa);
-        //print_r($jsonNa);
+    {        
         
-
-        return view('main.world',[
-                'jsonNa' => $jsonNa,
-                'mode' => 'world'
-                ]);
-        */        
-
         //echo $this->test->worldList();
-        $dataRow = DB::table('tbl_corona_world')     
+        $dataRow = DB::table('tbl_corona_world')   
+          
+                    ->select(DB::raw('seq as seq, create_dt as dt, nationNm as na_nm, nationNm_en, natDefCnt as nationDefCnt, natDeathCnt'),
+                        DB::raw('natDefCnt - (select natDefCnt from tbl_corona_world where nationNm = na_nm and create_dt = 
+                        (select create_dt from tbl_corona_world where create_dt < 
+                        (select create_dt from tbl_corona_world order by create_dt desc limit 1) order by create_dt desc limit 1)) 
+                        as defCnt'))
                     ->whereRaw('create_dt = date_format((select create_dt from tbl_corona_world order by create_dt desc limit 1), "%Y-%m-%d")')                
                     ->orderByDesc('natDefCnt')
-                    ->get();
+                    ->get();                                    
 
-        
-                    
-            
         return view('main.world',[
                 'jsonNa' => $dataRow,
                 'mode' => 'world'
@@ -264,8 +232,8 @@ class ContentController extends Controller
         $params = '?' . urlencode('ServiceKey') . '=' . $key; /*Service Key*/
         $params .= '&' . urlencode('pageNo') . '=' . urlencode('1'); /**/
         $params .= '&' . urlencode('numOfRows') . '=' . urlencode('10'); /**/
-        $params .= '&' . urlencode('startCreateDt') . '=' . urlencode('20210601'); /**/
-        $params .= '&' . urlencode('endCreateDt') . '=' . urlencode('20210630'); /**/
+        $params .= '&' . urlencode('startCreateDt') . '=' . urlencode('20210721'); /**/
+        $params .= '&' . urlencode('endCreateDt') . '=' . urlencode('20210731'); /**/
 
         $result = curl::getXml($url, $params);
         $result = json_decode($result);
