@@ -34,10 +34,22 @@
         <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-analytics.js"></script>        
     </head>
     <body>
+        <script type="text/javascript">
+            $(function(){
+
+                $("btn_modal_test").click(function(){
+
+                    $("#staticBackdrop").modal('show');
+                
+                });
+            });
+        
+        </script>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <div class="wrapper">
             @yield('content')
             <script src="{{ asset('assets/js/main.js') }}"></script>
+            <script src="{{ asset('assets/js/service-worker.js') }}"></script>
         </div>                
     </body>
 </html>
