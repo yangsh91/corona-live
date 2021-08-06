@@ -31,6 +31,12 @@
                 <div class="col-auto d-none d-sm-block">
                     <h3>코로나 <strong>확진자수</strong></h3>
                 </div>                
+                @if(session()->has('user_id'))
+                <div class="col-auto d-none d-sm-block">
+                    실시간 <strong>확진자수</strong> :
+                    <span class="badge badge-danger"> +{{ number_format($live_cnt) }}</span>
+                </div>
+                @endif
             </div>
             <div class="row">
                 <div class="col-xl-6 col-xxl-5 d-flex">
@@ -166,10 +172,9 @@
             </div>
 
             <div class="row">
-                <div class="col-12 col-lg-8 col-xxl-9 d-flex">
+                <div class="col-7 d-flex">
                     <div class="card flex-fill">
                         <div class="card-header">
-
                             <h5 class="card-title mb-0">지역별 감염자 통계</h5>
                         </div>
                         <table class="table table-hover my-0" id="tbl_region_cnt" style="text-align: center;">
@@ -185,7 +190,43 @@
                             <tbody></tbody>
                         </table>
                     </div>
-                </div>                
+                </div> 
+                
+                <div class="col-5 d-flex">
+                    <div class="card flex-fill table-wrapper-scroll-y my-custom-scrollbar">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">지역별 실시간 확진자 알림</h5>
+                        </div>
+                        <table class="table table-hover my-0" id="tbl_region_notify" style="text-align: center;">
+                            <colgroup>
+                                <col style="width: 55%;">
+                                <col style="width: 45%;">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>지역</th>
+                                    <th>내용</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($notiRows as $key => $noti)
+                                    <tr @if($key >= 17) id="notify_hidden" style="display: none;" @endif>
+                                        <td> {{ $noti['region'] }} {{ $noti['city'] }} </td>
+                                        <td> {{ $noti['msg_sub'] }} </td>
+                                    </tr>                                                                                 
+                                @endforeach
+                            </tbody>
+                        </table>
+
+                        <div class="w-100">       
+                            <div class="col-sm-12">
+                                <div class="card">                            
+                                    <button type="button" class="btn btn-primary" id="btn_more_notify">더보기</button>
+                                </div>                                
+                            </div>                                             
+                        </div>
+                    </div> 
+                </div>
             </div>
 
         </div>
@@ -516,18 +557,12 @@
                     //console.log(dateText);
                 }
             });
-        /*
-		$(function() {
-			$('#datetime_calendar').datetimepicker({
-				inline: true,
-				sideBySide: false,                
-				format: 'L',
-                maxDate: new Date(),                
-			});
-        */
-            //console.log("==== " + $("#datetime_calendar").data("datetimepicker").getDate() + " ====");
-            //console.log("==== " + $("#datetime_calendar").datetimepicker("getDate") + " ====");
-            //console.log(":::: " + $("#datetime_calendar").find("input").val() + " ::::");
+            
+            
+            $("#btn_more_notify").click(function(){                        
+                $("#notify_hidden").css("display","");            
+                $("#btn_more_notify").css("display", "none");
+            });
             
 		});
 

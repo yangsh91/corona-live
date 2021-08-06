@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\FcmController;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +26,16 @@ Route::get('/world', [ContentController::class, 'worldLive']);
 
 Route::get('/region', [ContentController::class, 'regionApi']);
 Route::get('/worldApi', [ContentController::class, 'worldApi']);
+Route::get('/getNotify', [ContentController::class, 'getNotify']);
 
 Route::get('/fcm', [FcmController::class, 'index']);
 Route::post('/saveToken', [FcmController::class, 'saveToken']);
 Route::get('/sendNoti', [FcmController::class, 'sendNoti']);
+
+Route::get('/auth/logout', [UserController::class, 'logout'])->name('auth.logout');
+
+Route::group(['middleware'=>['AuthCheck']], function(){
+    Route::post('/auth/register', [UserController::class, 'register'])->name('auth.register');
+    Route::post('/auth/login', [UserController::class, 'login'])->name('auth.login');
+});
+

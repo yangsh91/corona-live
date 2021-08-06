@@ -11,12 +11,51 @@ class ContentController extends Controller
 {
 
     public function __construct()
-    {
-        $this->test = new ContentModel();    
+    {        
+                
+        $notiList = DB::table('tbl_notify as a')            
+            ->select(DB::raw('a.*, b.region, b.city'))
+            ->leftJoin('tbl_code as b', 'a.location_id', '=', 'b.location_id')
+            ->whereRaw("date_format(send_dt, '%Y-%m-%d') = date_format(NOW(), '%Y-%m-%d')")
+            ->orderByDesc('send_dt')
+            ->get();
+
+        $live_cnt = 0;       
+        $notiRows = [];     
+        foreach($notiList as $key => $rows){
+
+            $msg = $rows->msg;
+            
+            preg_match('/확진자(.*?)발생/', $msg, $msgRow);            
+            
+            if(!empty($msgRow)){
+                if(!empty($msgRow[1])){
+                    
+                    $cnt = preg_replace("/[^0-9]*/s", "", $msgRow[1]);
+                    
+                    $cntRow = explode('명', $msgRow[1]);
+                    if(preg_match("/^[0-9]/i", trim($cntRow[0]))){
+                        $live_cnt += (integer) trim($cntRow[0]);
+                        
+                        array_push($notiRows, array(
+                            'region' => $rows->region,
+                            'city' => $rows->city,
+                            'msg' => $rows->msg,
+                            'msg_sub' => $msgRow[1],
+                            'send_dt' => $rows->send_dt
+                        ));
+                    }
+                }
+            }
+        }
+
+        $this->live_cnt = $live_cnt;
+        $this->notiRows = $notiRows;
+
     }
 
     public function main()
-    {
+    {        
 
         $key = urlencode(iconv('euc-kr','utf-8','Wq24xQBvYdlZ5SkdIEs9vysJpMQ09E7dLw3oLtQWkbIYp+l2tph1UjJ9n+19lwst+NngPiF9AxA7aPCEBWI1kw=='));        
 
@@ -137,6 +176,8 @@ class ContentController extends Controller
               
         
         return view('main.content',[
+                                    'live_cnt' => $this->live_cnt,
+                                    'notiRows' => $this->notiRows,
                                     'data' => $result->body->items,
                                     'weekData' => $weekResult->body->items, 
                                     'region' => $korResult->body->items,
@@ -165,6 +206,8 @@ class ContentController extends Controller
                     ->get();                                    
 
         return view('main.world',[
+                'live_cnt' => $this->live_cnt,
+                'notiRows' => $this->notiRows,
                 'jsonNa' => $dataRow,
                 'mode' => 'world'
                 ]);            
@@ -268,6 +311,43 @@ class ContentController extends Controller
             }
 
         }
+
+    }
+
+
+    public function getNotify()
+    {
+
+
+        $url = "http://apis.data.go.kr/1741000/DisasterMsg3/getDisasterMsg1List";
+        $key = urlencode(iconv('euc-kr','utf-8','Wq24xQBvYdlZ5SkdIEs9vysJpMQ09E7dLw3oLtQWkbIYp+l2tph1UjJ9n+19lwst+NngPiF9AxA7aPCEBWI1kw=='));
+
+        $params = '?' . urlencode('ServiceKey') . '=' . $key; /*Service Key*/
+        $params .= '&' . urlencode('pageNo') . '=' . urlencode('1'); /**/
+        $params .= '&' . urlencode('numOfRows') . '=' . urlencode('200'); /**/ 
+        $params .= '&' . urlencode('type') . '=' . urlencode('xml');       
+
+        $result = curl::getXml($url, $params);
+        $result = json_decode($result);
+
+        if(sizeof($result->row) > 0){
+
+            foreach($result->row as $data){
+
+                $re = DB::table('tbl_notify')
+                    ->updateorInsert(
+                        ['send_no' => $data->md101_sn , 'location_id' => $data->location_id],
+                        ['location_nm' => $data->location_name, 'msg' => $data->msg, 'send_dt' => $data->create_date]
+                    );
+
+                if(!$re){
+                    echo "failed";
+                    break;
+                }
+
+            }
+        }
+
 
     }
     
