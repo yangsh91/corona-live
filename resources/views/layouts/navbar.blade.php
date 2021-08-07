@@ -68,7 +68,7 @@
                 <div class="dropdown-menu-header">
                     로그인
                 </div>
-                <form action="{{ route('auth.login') }}" method="post">
+                <form id="frm_login_act" action="{{ route('auth.login') }}" method="post">
                     @csrf
                     <div class="list-group">
                         <a class="list-group-item">
@@ -77,7 +77,7 @@
                                     <span>아이디</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" name="user_id" value="{{ old('user_id') }}">
+                                    <input type="text" class="form-control" name="user_id" id="user_id" value="{{ old('user_id') }}">
                                 </div>
                             </div>
                         </a>
@@ -87,7 +87,7 @@
                                     <span>비밀번호</span>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="password" class="form-control" name="user_pass">
+                                    <input type="password" class="form-control" name="user_pass" id="user_pass">
                                 </div>
                             </div>
                         </a>    
@@ -95,7 +95,7 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col-md-12">
                                     <div class="d-grid gap-2">
-                                    <button type="submit" id="btn_login" class="btn btn-info btn-lg btn-primary">로그인</button>
+                                    <button type="button" id="btn_login" class="btn btn-info btn-lg btn-primary" style="width: 100%;">로그인</button>
                                     </div>
                                 </div>
                             </div>
@@ -103,8 +103,8 @@
                     </div>
                 </form>
                 <div class="dropdown-menu-footer">
-                    <a href="" class="text-muted">아이디&비빌번호 찾기</a>
-                    /                
+                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">아이디&패스워드 찾기</button>
+                    |                
                     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">회원가입</button>                
                 </div>
             </div>

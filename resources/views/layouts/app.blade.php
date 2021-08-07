@@ -40,6 +40,31 @@
             @yield('content')
             <script src="{{ asset('assets/js/main.js') }}"></script>
             <script src="{{ asset('assets/js/service-worker.js') }}"></script>
+            <script type="text/javascript">
+                
+                $(function(){
+
+                    $("#btn_login").click(function(){
+
+                        console.log("~~~~~~");
+
+                        if($("#user_id").val() == ""){
+                            alert("아이디를 입력해 주세요.");
+                            return;
+                        }
+
+                        if($("#user_pass").val() == ""){
+                            alert("비밀번호를 입력해 주세요.");
+                            return;
+                        }
+
+                        $("#frm_login_act").submit();
+
+                    });
+                    
+                })
+            
+            </script>
         </div>                        
     </body>
 </html>
