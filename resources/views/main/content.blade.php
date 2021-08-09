@@ -225,7 +225,7 @@
                             </thead>
                             <tbody>
                                 @foreach($notiRows as $key => $noti)
-                                    <tr @if($key >= 17) id="notify_hidden" style="display: none;" @endif>
+                                    <tr @if($key >= 17) class="notify_hidden" style="display: none;" @endif>
                                         <td> {{ $noti['region'] }} {{ $noti['city'] }} </td>
                                         <td> {{ $noti['msg_sub'] }} </td>
                                     </tr>                                                                                 
@@ -575,7 +575,7 @@
             
             
             $("#btn_more_notify").click(function(){                        
-                $("#notify_hidden").css("display","");            
+                $(".notify_hidden").css("display","");            
                 $("#btn_more_notify").css("display", "none");
             });
             

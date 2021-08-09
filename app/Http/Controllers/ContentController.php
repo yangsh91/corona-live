@@ -352,6 +352,7 @@ class ContentController extends Controller
                         ['send_no' => $data->md101_sn , 'location_id' => $data->location_id, 'location_nm' => $data->location_name, 'msg' => $data->msg, 'send_dt' => $data->create_date]
                     );
                 }
+                
 
                 if(!$re){
                     echo "failed";

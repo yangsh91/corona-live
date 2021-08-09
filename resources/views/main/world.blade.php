@@ -65,7 +65,7 @@
                     <div class="card flex-fill w-100">
                         <div class="card-header">
 
-                            <h5 class="card-title mb-0">월별 확진자수</h5>
+                            <h5 class="card-title mb-0">나라별 백신 접종률</h5>
                         </div>
                         <div class="card-body d-flex w-100">
                             <div class="align-self-center chart chart-lg">

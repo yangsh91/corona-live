@@ -104,7 +104,7 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col-md-12">
                                     <div class="d-grid gap-2">
-                                    <button type="button" id="btn_login" class="btn btn-info btn-lg btn-primary" style="width: 100%;">로그인</button>
+                                    <button type="button" id="btn_login" class="btn btn-outline-primary btn-lg btn-primary" style="width: 100%;">로그인</button>
                                     </div>
                                 </div>
                             </div>
@@ -112,9 +112,9 @@
                     </div>
                 </form>
                 <div class="dropdown-menu-footer">
-                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#findModal">아이디&패스워드 찾기</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#findModal">아이디&패스워드 찾기</button>
                     |                
-                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">회원가입</button>                
+                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal">회원가입</button>                
                 </div>
             </div>
         </li>
@@ -205,7 +205,7 @@
             </div>
             <div class="col-md-12">
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>  
@@ -270,7 +270,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">닫기</button>
       </div>
     </div>
 
