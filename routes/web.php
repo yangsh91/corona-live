@@ -5,6 +5,7 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\FcmController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,10 +33,15 @@ Route::get('/fcm', [FcmController::class, 'index']);
 Route::post('/saveToken', [FcmController::class, 'saveToken']);
 Route::get('/sendNoti', [FcmController::class, 'sendNoti']);
 
+Route::get('/send-email', [MailController::class, 'sendEmail']);
+
 Route::get('/auth/logout', [UserController::class, 'logout'])->name('auth.logout');
 
 Route::group(['middleware'=>['AuthCheck']], function(){
     Route::post('/auth/register', [UserController::class, 'register'])->name('auth.register');
     Route::post('/auth/login', [UserController::class, 'login'])->name('auth.login');
+    Route::post('auth/saveUserInfo', [UserController::class, 'saveUserInfo'])->name('auth.saveUserInfo');
+    Route::post('/auth/findUserId', [UserController::class, 'findUserId'])->name('auth.findUserId');
+    Route::post('/auth/findUserPass', [UserController::class, 'findUserPass'])->name('auth.findUserPass');
 });
 

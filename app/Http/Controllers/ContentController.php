@@ -333,12 +333,23 @@ class ContentController extends Controller
         if(sizeof($result->row) > 0){
 
             foreach($result->row as $data){
+                
 
-                $re = DB::table('tbl_notify')
-                    ->updateorInsert(
-                        ['send_no' => $data->md101_sn , 'location_id' => $data->location_id],
-                        ['location_nm' => $data->location_name, 'msg' => $data->msg, 'send_dt' => $data->create_date]
+                $chkNotify = DB::table('tbl_notify')
+                ->where('send_no', '=', $data->md101_sn)
+                ->count();
+                
+
+                if($chkNotify > 0){
+                    $re = DB::table('tbl_notify')
+                        ->where(['send_no' => $data->md101_sn], ['location_id' => $data->location_id])
+                        ->update(['location_id' => $data->location_id], ['location_nm' => $data->location_name], ['msg' => $data->msg]);
+                }else{
+                    $re = DB::table('tbl_notify')
+                    ->insert(
+                        ['send_no' => $data->md101_sn , 'location_id' => $data->location_id, 'location_nm' => $data->location_name, 'msg' => $data->msg, 'send_dt' => $data->create_date]
                     );
+                }
 
                 if(!$re){
                     echo "failed";
@@ -347,6 +358,9 @@ class ContentController extends Controller
 
             }
         }
+
+
+        echo "success";
 
 
     }
