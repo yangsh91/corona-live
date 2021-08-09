@@ -40,7 +40,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="text-center">
-                                            <span class="card-title mb-4" style="font-size: 1.4rem;">실시간 확진자수</span>
+                                            <span class="card-title mb-4" style="font-size: 1.4rem;">실시간 확진자수 &#58; </span>
                                             <span class="badge badge-danger" style="font-size: 1.4rem;"> +{{ number_format($live_cnt) }}</span>                                            
                                         </div>
                                         <div class="text-center">
