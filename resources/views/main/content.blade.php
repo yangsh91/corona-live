@@ -40,8 +40,13 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="text-center">
-                                            <span class="card-title mb-4">실시간 확진자수</span>
-                                            <span class="badge badge-danger"> +{{ number_format($live_cnt) }}</span>
+                                            <span class="card-title mb-4" style="font-size: 1.4rem;">실시간 확진자수</span>
+                                            <span class="badge badge-danger" style="font-size: 1.4rem;"> +{{ number_format($live_cnt) }}</span>                                            
+                                        </div>
+                                        <div class="text-center">
+                                            <span class="card-title" style="font-size: 0.6rem;color: #b1b1b1;">
+                                                *본 실시간 확진자수는 행정안전부 재난문자 발송 지역별 확진자 데이터를 취합한 자료로 실제 확진자수와 차이가 있습니다.
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

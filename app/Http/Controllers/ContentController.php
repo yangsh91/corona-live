@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\CurlController as curl;
 use App\Models\ContentModel;
 use Illuminate\Support\Facades\DB;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class ContentController extends Controller
 {
